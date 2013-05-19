@@ -2,7 +2,7 @@
 //
 // a c++ tic-tac-toe application
 //
-// v- 1.01 bph- 2013
+// v- 1.02 bph- 2013
 
 #include <iostream>
 
@@ -10,6 +10,7 @@ using namespace std;
 
 // defines some functions to be used in the game
 void welcome();
+void nextTurn();
 void currentBoard();
 void endGame();
 
@@ -32,7 +33,7 @@ int main() {
 
 	welcome();
 	do {
-		currentBoard();
+		nextTurn();
 	} while (gameOver == false);
 
 	return 0;
@@ -88,20 +89,10 @@ void welcome() {
 }
 
 // displaying the board as it currently stands
-void currentBoard() {
+void nextTurn() {
 
-	// shows the board as it currently stands
-	cout << "__|_____|_____|_____|__" << endl;
-	cout << "  |     |     |     |  " << endl;
-	cout << "  |  " << a[2] << "  |  " << b[2] << "  |  " << c[2] << "  | 3" << endl;
-	cout << "__|_____|_____|_____|__" << endl;
-	cout << "  |     |     |     |  " << endl;
-	cout << "  |  " << a[1] << "  |  " << b[1] << "  |  " << c[1] << "  | 2" << endl;
-	cout << "__|_____|_____|_____|__" << endl;
-	cout << "  |     |     |     |  " << endl;
-	cout << "  |  " << a[0] << "  |  " << b[0] << "  |  " << c[0] << "  | 1" << endl;
-	cout << "__|_____|_____|_____|__" << endl;
-	cout << "  |  A  |  B  |  C  |  \n" << endl;
+	// shows the game board
+	currentBoard();
 
 	// specifies that so far a valid move has not been made this turn
 	bool validMove = false;
@@ -219,11 +210,27 @@ void currentBoard() {
 	playeroneTurn = !playeroneTurn;
 }
 
+void currentBoard() {
+	// shows the board as it currently stands
+	cout << "__|_____|_____|_____|__" << endl;
+	cout << "  |     |     |     |  " << endl;
+	cout << "  |  " << a[2] << "  |  " << b[2] << "  |  " << c[2] << "  | 3" << endl;
+	cout << "__|_____|_____|_____|__" << endl;
+	cout << "  |     |     |     |  " << endl;
+	cout << "  |  " << a[1] << "  |  " << b[1] << "  |  " << c[1] << "  | 2" << endl;
+	cout << "__|_____|_____|_____|__" << endl;
+	cout << "  |     |     |     |  " << endl;
+	cout << "  |  " << a[0] << "  |  " << b[0] << "  |  " << c[0] << "  | 1" << endl;
+	cout << "__|_____|_____|_____|__" << endl;
+	cout << "  |  A  |  B  |  C  |  \n" << endl;
+}
+
 // function used to see if the game is over
 void endGame() {
 
 	// determines if one of the player's has won the game by checking to see if there is a three-in-a-row
 	if ((a[0] != ' ' && a[0] == a[1] && a[1] == a[2]) || (b[0] != ' ' && b[0] == b[1] && b[1] == b[2]) || (c[0] != ' ' && c[0] == c[1] && c[1] == c[2]) || (a[0] != ' ' && a[0] == b[0] && b[0] == c[0]) || (a[1] != ' ' && a[1] == b[1] && b[1] == c[1]) || (a[2] != ' ' && a[2] == b[2] && b[2] == c[2]) || (a[0] != ' ' && a[0] == b[1] && b[1] == c[2]) || (a[2] != ' ' && a[2] == b[1] && b[1] == c[0])) {
+		
 		// declares the game over and states that a victory has occurred
 		gameOver = true;
 		victory = true;
@@ -231,34 +238,15 @@ void endGame() {
 		if (playeroneTurn == true) {
 						
 			// shows the final game board
-			cout << "\n__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[2] << "  |  " << b[2] << "  |  " << c[2] << "  | 3" << endl;
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[1] << "  |  " << b[1] << "  |  " << c[1] << "  | 2" << endl;
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[0] << "  |  " << b[0] << "  |  " << c[0] << "  | 1" << endl;
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |  A  |  B  |  C  |  \n" << endl;
+			cout << endl;
+			currentBoard();
 			cout << "Congratulations, " << playeroneName << ", you are the winner!" << endl;
 		}
 		if (playeroneTurn == false) {
 
 			// shows the final game board
-			cout << "\n__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[2] << "  |  " << b[2] << "  |  " << c[2] << "  | 3" << endl;
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[1] << "  |  " << b[1] << "  |  " << c[1] << "  | 2" << endl;
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |     |     |     |  " << endl;
-			cout << "  |  " << a[0] << "  |  " << b[0] << "  |  " << c[0] << "  | 1" << endl;
-	
-			cout << "__|_____|_____|_____|__" << endl;
-			cout << "  |  A  |  B  |  C  |  \n" << endl;
+			cout << endl;
+			currentBoard();
 			cout << "Congratulations, " << playertwoName << ", you are the winner!" << endl;
 		}
 	}
@@ -270,17 +258,8 @@ void endGame() {
 		gameOver = true;
 
 		// shows the final game board
-		cout << "\n__|_____|_____|_____|__" << endl;
-		cout << "  |     |     |     |  " << endl;
-		cout << "  |  " << a[2] << "  |  " << b[2] << "  |  " << c[2] << "  | 3" << endl;
-		cout << "__|_____|_____|_____|__" << endl;
-		cout << "  |     |     |     |  " << endl;
-		cout << "  |  " << a[1] << "  |  " << b[1] << "  |  " << c[1] << "  | 2" << endl;
-		cout << "__|_____|_____|_____|__" << endl;
-		cout << "  |     |     |     |  " << endl;
-		cout << "  |  " << a[0] << "  |  " << b[0] << "  |  " << c[0] << "  | 1" << endl;
-		cout << "__|_____|_____|_____|__" << endl;
-		cout << "  |  A  |  B  |  C  |  \n" << endl;
+		cout << endl;
+		currentBoard();
 		cout << "Cats game!\n\nThe game has resulted in a tie.  Thank you both for playing!" << endl;
 	}
 }
